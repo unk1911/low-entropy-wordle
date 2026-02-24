@@ -10,7 +10,105 @@ A daily word-guessing game based on [Wordle](https://www.nytimes.com/games/wordl
 
 Every day you start with a **free clue** — a pre-filled word that shares at least one letter with the answer. Use it wisely to guide your guesses.
 
-At the end of the game you receive a **Skill Score** — a weighted measure of how many correct and present letters you found across your guesses, with earlier rows weighted more heavily. Higher is better.
+At the end of the game you receive a **Skill Score** that measures how efficiently you identified letters across your guesses. Higher is better.
+
+---
+
+## The Skill Score Algorithm
+
+This is the defining feature of Low Entropy Wordle. Here's exactly how it works.
+
+### The core idea
+
+Each of your guesses is scored based on **how many letters you found** and **how early you found them**. Finding letters sooner is worth more than finding them later — because a skilled player squeezes as much information as possible out of every guess.
+
+### Letter point values
+
+Each tile in your guess contributes points:
+
+| Tile | Meaning | Points |
+|------|---------|--------|
+| 🟩 Green | Correct letter, correct position | **1.0** |
+| 🟨 Yellow | Correct letter, wrong position | **0.5** |
+| ⬛ Gray | Letter not in the word | 0 |
+
+### Row weights
+
+Earlier rows are worth more. The weight for each row is:
+
+```
+weight = (6 - rowIndex) / 6
+```
+
+| Row | Weight |
+|-----|--------|
+| Row 0 ⭐ (free clue) | 6/6 = **1.00** |
+| Row 1 (your 1st guess) | 5/6 ≈ **0.83** |
+| Row 2 | 4/6 ≈ **0.67** |
+| Row 3 | 3/6 = **0.50** |
+| Row 4 | 2/6 ≈ **0.33** |
+| Row 5 | 1/6 ≈ **0.17** |
+
+### Formula
+
+For each row played:
+
+```
+rowScore = lettersFound × weight
+```
+
+where `lettersFound` = (number of 🟩 greens × 1.0) + (number of 🟨 yellows × 0.5).
+
+The total Skill Score is the **sum of all row scores**:
+
+```
+skillScore = Σ (lettersFound[row] × weight[row])
+```
+
+### Worked example
+
+Take this game (target: **RANCH**):
+
+```
+Row 0 ⭐  S C A R Y   →  🟩🟨⬛🟨⬛   greens=1, yellows=2  →  (1 + 1.0) × 1.00 = 2.00
+Row 1     Y A C H T   →  🟨🟩🟨🟩⬛   greens=2, yellows=2  →  (2 + 1.0) × 0.83 = 2.50
+Row 2     R A N C H   →  🟩🟩🟩🟩🟩   greens=5             →  (5 + 0.0) × 0.67 = 3.33
+                                                              ──────────────────────────
+                                                              Skill Score  =  7.83
+```
+
+> **Note:** Row 0 is the free pre-filled clue — its letters count toward the score even though you didn't choose the word. This reflects the head start the game gives you.
+
+### What makes a high score?
+
+- **Finding greens and yellows early** — heavy row weights amplify early discoveries
+- **Winning in fewer guesses** — fewer rows means the remaining rows have zero weight, but the early rows carry more weight relative to those played
+- **Using the free clue wisely** — Row 0 always has weight 1.0, the highest possible, so understanding what it tells you directly boosts your score
+
+### Implementation
+
+The algorithm lives in [`src/utils/gameLogic.js`](src/utils/gameLogic.js):
+
+```js
+export function calculateSkillScore(guesses, currentRow, gameStatus) {
+  if (gameStatus === 'playing') return 0;
+  const rowsUsed = gameStatus === 'won' ? currentRow : MAX_GUESSES;
+  let score = 0;
+  for (let row = 0; row < rowsUsed; row++) {
+    const weight = (MAX_GUESSES - row) / MAX_GUESSES;
+    let lettersFound = 0;
+    for (let col = 0; col < WORD_LENGTH; col++) {
+      const cell = guesses[row][col];
+      if (cell.state === 'correct') lettersFound += 1;
+      else if (cell.state === 'present') lettersFound += 0.5;
+    }
+    score += lettersFound * weight;
+  }
+  return score;
+}
+```
+
+---
 
 ## How to play
 
