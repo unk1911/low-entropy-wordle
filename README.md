@@ -1,10 +1,24 @@
 # Low Entropy Wordle
 
-A daily word-guessing game based on [Wordle](https://www.nytimes.com/games/wordle/index.html), with an information-theory twist.
+A daily word-guessing game based on [Wordle](https://www.nytimes.com/games/wordle/index.html), built for **competitive play among friends**.
 
 🎮 **Play it live:** [wordle.edeliverables.com](https://wordle.edeliverables.com)
 
 ![Low Entropy Wordle screenshot](docs/screenshot.png)
+
+## Why this exists
+
+This game was designed for **friend groups and tournaments** where everyone solves the same daily puzzle and wants to know who truly played best.
+
+The standard Wordle only tells you how many guesses you used. That works fine until two (or more) players solve the puzzle in the same number of rows — then what? Who wins?
+
+Low Entropy Wordle solves that with a **Skill Score tie-breaker**. If you and your friends all solved today's puzzle in 4 guesses, the Skill Score tells you who did it most efficiently — who found the right letters earliest, and who was just lucky on the last guess.
+
+**The intended flow for a tournament:**
+1. Everyone plays the same daily puzzle independently
+2. Compare number of guesses first — fewest wins
+3. If tied on guesses, compare Skill Scores — **highest wins**
+4. Share your results using the built-in Share button, which includes your Skill Score
 
 ## What makes it different?
 
