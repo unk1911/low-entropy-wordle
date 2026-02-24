@@ -70,11 +70,11 @@ skillScore = Σ (lettersFound[row] × weight[row])
 Take this game (target: **RANCH**):
 
 ```
-Row 0 ⭐  S C A R Y   →  🟩🟨⬛🟨⬛   greens=1, yellows=2  →  (1 + 1.0) × 1.00 = 2.00
-Row 1     Y A C H T   →  🟨🟩🟨🟩⬛   greens=2, yellows=2  →  (2 + 1.0) × 0.83 = 2.50
-Row 2     R A N C H   →  🟩🟩🟩🟩🟩   greens=5             →  (5 + 0.0) × 0.67 = 3.33
+Row 0 ⭐  S C A R Y   →  ⬛🟨🟨🟨⬛   greens=0, yellows=3  →  (0 + 1.5) × 1.00 = 1.50
+Row 1     Y A C H T   →  ⬛🟩🟨🟨⬛   greens=1, yellows=2  →  (1 + 1.0) × 0.83 = 1.67
+Row 2     R A N C H   →  🟩🟩🟩🟩🟩   greens=5, yellows=0  →  (5 + 0.0) × 0.67 = 3.33
                                                               ──────────────────────────
-                                                              Skill Score  =  7.83
+                                                              Skill Score  =  6.50
 ```
 
 > **Note:** Row 0 is the free pre-filled clue — its letters count toward the score even though you didn't choose the word. This reflects the head start the game gives you.
