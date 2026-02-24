@@ -4,6 +4,8 @@ A daily word-guessing game based on [Wordle](https://www.nytimes.com/games/wordl
 
 🎮 **Play it live:** [wordle.edeliverables.com](https://wordle.edeliverables.com)
 
+![Low Entropy Wordle screenshot](docs/screenshot.png)
+
 ## What makes it different?
 
 Every day you start with a **free clue** — a pre-filled word that shares at least one letter with the answer. Use it wisely to guide your guesses.
