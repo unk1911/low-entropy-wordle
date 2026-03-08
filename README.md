@@ -18,13 +18,16 @@ Low Entropy Wordle solves that with a **Skill Score tie-breaker**. If you and yo
 1. Everyone plays the same daily puzzle independently
 2. Compare number of guesses first — fewest wins
 3. If tied on guesses, compare Skill Scores — **highest wins**
-4. Share your results using the built-in Share button, which includes your Skill Score
+4. If still tied on Skill Score, compare Time — **fastest wins**
+5. Share your results using the built-in Share button, which includes your Skill Score and Time
 
 ## What makes it different?
 
 Every day you start with a **free clue** — a pre-filled word that shares at least one letter with the answer. Use it wisely to guide your guesses.
 
-At the end of the game you receive a **Skill Score** that measures how efficiently you identified letters across your guesses. Higher is better.
+At the end of each row you can see a **"X left"** badge to the right of the board — the number of valid words still consistent with all clues revealed so far. Watch the search space collapse toward 1 as you zero in on the answer.
+
+At the end of the game you receive a **Skill Score** that measures how efficiently you identified letters across your guesses, and a **Time** showing how long the puzzle took you. Both are included in the shareable result.
 
 ---
 
@@ -124,6 +127,48 @@ export function calculateSkillScore(guesses, currentRow, gameStatus) {
 
 ---
 
+## Search Space Tracker
+
+After each submitted row, a small badge appears to the right of that row showing how many words from the full 12,915-word dictionary are still **consistent with every clue revealed so far**.
+
+### How it works
+
+For each candidate word in the dictionary, the game simulates running every submitted guess against it and checks whether the resulting tile pattern matches what was actually shown. If it does for all guesses so far, the word is still a valid candidate. The badge shows how many candidates survive.
+
+```
+Row 0 ⭐  S C A R Y   →  ⬛🟨🟨🟨⬛    843 left
+Row 1     Y A C H T   →  ⬛🟩🟨🟨⬛     12 left
+Row 2     R A N C H   →  🟩🟩🟩🟩🟩      1 left  ✓
+```
+
+This gives you real-time feedback on how efficiently your guesses are eliminating possibilities — the faster you drive the count down, the sharper your play.
+
+The full candidate calculation is also logged to the browser console on each row for debugging and analysis.
+
+---
+
+## Game Timer
+
+A timer starts the moment the game loads. When you win or lose, the elapsed time is captured and displayed as `M:SS` in the result modal alongside your Skill Score.
+
+The time is also included in the shareable text:
+
+```
+Low Entropy Wordle 2026-03-08
+3/6
+
+⬛🟨🟨🟨⬛
+⬛🟩🟨🟨⬛
+🟩🟩🟩🟩🟩
+
+Tie-Breaker Score: 6.50
+Time: 1:42
+```
+
+**Use time as a final tie-breaker** — if two players have the same guess count and Skill Score, the faster solve wins.
+
+---
+
 ## How to play
 
 - Guess the 5-letter word in 6 tries
@@ -161,14 +206,15 @@ src/
 ├── components/
 │   ├── Board.jsx         # 6-row game grid
 │   ├── Keyboard.jsx      # On-screen keyboard
-│   ├── ResultModal.jsx   # Win/loss modal + share button
-│   ├── Row.jsx           # A row of 5 tiles
+│   ├── ResultModal.jsx   # Win/loss modal + share button (shows score & time)
+│   ├── Row.jsx           # A row of 5 tiles + remaining-candidates badge
 │   ├── Tile.jsx          # Single letter tile with flip animation
 │   └── WordleGame.jsx    # Main game layout
 ├── hooks/
-│   └── useWordleGame.js  # All game state logic
+│   └── useWordleGame.js  # All game state logic (timer, search space tracking)
 ├── utils/
-│   └── gameLogic.js      # Pure functions (checkGuess, scoring, RNG, etc.)
+│   └── gameLogic.js      # Pure functions (checkGuess, scoring, RNG, search space, etc.)
 └── data/
-    └── words.js          # Word lists (1,015 target words + 3,562 valid guesses)
+    ├── words.js          # Curated target word pool (daily puzzle answers)
+    └── 5-letter-words.txt  # Full 12,915-word dictionary (valid guess universe)
 ```
