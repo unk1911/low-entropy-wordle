@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MAX_GUESSES, generateShareText } from '../utils/gameLogic';
+import { MAX_GUESSES, generateShareText, formatTime } from '../utils/gameLogic';
 
 export default function ResultModal({
   isOpen,
@@ -10,13 +10,14 @@ export default function ResultModal({
   date,
   onClose,
   skillScore,
+  elapsedTime,
 }) {
   const [copied, setCopied] = useState(false);
 
   if (!isOpen) return null;
 
   const handleShare = async () => {
-    const text = generateShareText(guesses, currentRow, gameStatus === 'won', date);
+    const text = generateShareText(guesses, currentRow, gameStatus === 'won', date, elapsedTime);
     try {
       await navigator.clipboard.writeText(text);
     } catch {
@@ -60,6 +61,10 @@ export default function ResultModal({
 	    <span className="stat-value">{skillScore?.toFixed(2)}</span>
 	    <span className="stat-label">Skill Score</span>
 	  </div>
+          <div className="stat">
+            <span className="stat-value">{formatTime(elapsedTime)}</span>
+            <span className="stat-label">Time</span>
+          </div>
         </div>
 
         <button className="share-button" onClick={handleShare}>

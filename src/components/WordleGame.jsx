@@ -18,6 +18,8 @@ export default function WordleGame() {
     handleKeyPress,
     date,
     skillScore,
+    elapsedTime,
+    remainingCounts,
   } = useWordleGame();
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -47,7 +49,7 @@ export default function WordleGame() {
         </div>
       )}
 
-      <Board board={board} shakeRow={shakeRow} revealingRow={revealingRow} />
+      <Board board={board} shakeRow={shakeRow} revealingRow={revealingRow} remainingCounts={remainingCounts} />
 
       <Keyboard usedKeys={usedKeys} onKeyPress={handleKeyPress} />
 
@@ -59,6 +61,7 @@ export default function WordleGame() {
         currentRow={currentRow}
         date={date}
         skillScore={skillScore}
+        elapsedTime={elapsedTime}
         onClose={() => setModalOpen(false)}
       />
     </div>

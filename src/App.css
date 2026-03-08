@@ -108,12 +108,10 @@
 .row {
   display: flex;
   gap: 5px;
+  position: relative;
 }
 .row.shake {
   animation: shake 0.5s ease-in-out;
-}
-.row.initial-row {
-  position: relative;
 }
 .row.initial-row:before {
   content: "⭐";
@@ -155,12 +153,46 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding: 10px 10px 10px 40px;
+  padding: 10px 90px 10px 40px;
 }
 @media (max-width: 500px) {
   .board {
     gap: 4px;
     padding-left: 30px;
+    padding-right: 75px;
+  }
+}
+.row-candidates {
+  position: absolute;
+  left: calc(5 * 62px + 4 * 5px + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 44px;
+  animation: fadeIn 0.3s ease;
+}
+.row-candidates-count {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+}
+.row-candidates-label {
+  font-size: 0.6rem;
+  color: #818384;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+@media (max-width: 500px) {
+  .row-candidates {
+    left: calc(5 * 52px + 4 * 4px + 8px);
+  }
+}
+@media (max-width: 380px) {
+  .row-candidates {
+    left: calc(5 * 44px + 4 * 4px + 8px);
   }
 }
 .keyboard {

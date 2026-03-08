@@ -1,11 +1,13 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import {
   MAX_GUESSES,
   WORD_LENGTH,
+  WORD_LIST,
   checkGuess,
   createEmptyBoard,
   updateUsedKeys,
   calculateSkillScore,
+  calculateRemainingWords,
   getDailyWords,
   getDateString,
   isValidWord,
@@ -51,6 +53,9 @@ export default function useWordleGame() {
   const [shakeRow, setShakeRow] = useState(null);
   const [message, setMessage] = useState('');
   const [revealingRow, setRevealingRow] = useState(null);
+  const startTimeRef = useRef(Date.now());
+  const [elapsedTime, setElapsedTime] = useState(null);
+  const [remainingCounts, setRemainingCounts] = useState([]);
 
   // Show a temporary toast message
   const showMessage = useCallback((text, duration = 1500) => {
@@ -145,6 +150,29 @@ export default function useWordleGame() {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [handleKeyPress]);
 
+  // Log remaining search space AND store per-row counts for the UI
+  useEffect(() => {
+    const total = WORD_LIST.length;
+    const remaining = calculateRemainingWords(gameState.guesses, gameState.currentRow);
+    const eliminated = total - remaining;
+    const pct = ((eliminated / total) * 100).toFixed(1);
+    console.log(
+      `[After row ${gameState.currentRow - 1}] Remaining candidates: ${remaining} / ${total} (${pct}% eliminated)`
+    );
+    setRemainingCounts((prev) => {
+      const next = [...prev];
+      next[gameState.currentRow - 1] = remaining;
+      return next;
+    });
+  }, [gameState.currentRow]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Record elapsed time when the game ends
+  useEffect(() => {
+    if (gameState.gameStatus !== 'playing') {
+      setElapsedTime(Math.round((Date.now() - startTimeRef.current) / 1000));
+    }
+  }, [gameState.gameStatus]);
+
   // Build the display board (includes current in-progress guess in the active row)
   const getDisplayBoard = useCallback(() => {
     const board = gameState.guesses.map((row) => [...row]);
@@ -172,5 +200,7 @@ export default function useWordleGame() {
     handleKeyPress,
     date: getDateString(),
     skillScore: calculateSkillScore(gameState.guesses, gameState.currentRow, gameState.gameStatus),
+    elapsedTime,
+    remainingCounts,
   };
 }

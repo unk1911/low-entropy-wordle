@@ -1,10 +1,12 @@
-import { TARGET_WORDS, EXTRA_VALID_WORDS } from '../data/words';
+import { TARGET_WORDS } from '../data/words';
+import wordListRaw from '../data/5-letter-words.txt?raw';
 
 export const MAX_GUESSES = 6;
 export const WORD_LENGTH = 5;
 
-// All words accepted as valid guesses
-const VALID_WORDS = new Set([...TARGET_WORDS, ...EXTRA_VALID_WORDS]);
+// Full universe of valid words (used for guess validation and search space calculation)
+export const WORD_LIST = wordListRaw.split('\n').map((w) => w.trim().toLowerCase()).filter(Boolean);
+const VALID_WORDS = new Set(WORD_LIST);
 
 /**
  * Check a guess against the target word.
@@ -98,7 +100,7 @@ export function calculateSkillScore(guesses, currentRow, gameStatus) {
 /**
  * Generate the emoji share text for the result.
  */
-export function generateShareText(guesses, rowsUsed, won, dateString) {
+export function generateShareText(guesses, rowsUsed, won, dateString, elapsedTime) {
   const stateEmoji = {
     correct: '🟩',
     present: '🟨',
@@ -113,7 +115,7 @@ export function generateShareText(guesses, rowsUsed, won, dateString) {
     .join('\n');
   const score = calculateSkillScore(guesses, rowsUsed, 'won');
   const scoreRounded = score.toFixed(2);
-  return header + grid + '\n' + `Tie-Breaker Score: ${scoreRounded}`;
+  return header + grid + '\n' + `Tie-Breaker Score: ${scoreRounded}` + '\n' + `Time: ${formatTime(elapsedTime)}`;
 }
 
 /**
@@ -187,4 +189,40 @@ export function getDailyWords() {
  */
 export function isValidWord(word) {
   return VALID_WORDS.has(word.toLowerCase());
+}
+
+/**
+ * Count how many words in WORD_LIST are still consistent with all submitted guesses.
+ * A candidate is consistent if simulating each guess against it produces the same
+ * letter states that were actually revealed.
+ */
+export function calculateRemainingWords(guesses, currentRow) {
+  const submitted = [];
+  for (let row = 0; row < currentRow; row++) {
+    const cells = guesses[row];
+    if (!cells || cells[0].state === 'empty' || cells[0].state === 'tbd') continue;
+    const word = cells.map((c) => c.letter).join('').toLowerCase();
+    const states = cells.map((c) => c.state);
+    submitted.push({ word, states });
+  }
+  if (submitted.length === 0) return WORD_LIST.length;
+  return WORD_LIST.filter((candidate) => {
+    for (const { word, states } of submitted) {
+      const simulated = checkGuess(word, candidate);
+      for (let i = 0; i < WORD_LENGTH; i++) {
+        if (simulated[i] !== states[i]) return false;
+      }
+    }
+    return true;
+  }).length;
+}
+
+/**
+ * Format elapsed seconds as M:SS.
+ */
+export function formatTime(seconds) {
+  if (seconds == null) return '--:--';
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m}:${String(s).padStart(2, '0')}`;
 }
