@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "generate-words": "node scripts/generate-daily-words.mjs",
+    "build": "node scripts/generate-daily-words.mjs && vite build",
     "preview": "vite preview"
   },
   "dependencies": {

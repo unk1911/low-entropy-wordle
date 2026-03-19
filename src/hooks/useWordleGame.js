@@ -12,9 +12,10 @@ import {
   getDateString,
   isValidWord,
 } from '../utils/gameLogic';
+import { saveGameState, loadGameState } from '../utils/storage';
 
-function buildInitialState() {
-  const { targetWord, initialWord } = getDailyWords();
+function buildFreshState(dateStr) {
+  const { targetWord, initialWord } = getDailyWords(dateStr);
   const board = createEmptyBoard();
 
   // Pre-fill row 0 with the starting word and its letter states vs the target
@@ -45,17 +46,59 @@ function buildInitialState() {
     targetWord,
     initialWord,
     usedKeys,
+    elapsedSeconds: 0,
   };
 }
 
-export default function useWordleGame() {
-  const [gameState, setGameState] = useState(buildInitialState);
+function buildInitialState(dateStr) {
+  const saved = loadGameState(dateStr);
+  if (saved) return saved;
+  return buildFreshState(dateStr);
+}
+
+export default function useWordleGame(selectedDate) {
+  const today = getDateString();
+  const dateStr = selectedDate || today;
+  const isReplay = dateStr !== today;
+
+  const [gameState, setGameState] = useState(() => buildInitialState(dateStr));
   const [shakeRow, setShakeRow] = useState(null);
   const [message, setMessage] = useState('');
   const [revealingRow, setRevealingRow] = useState(null);
   const startTimeRef = useRef(Date.now());
   const [elapsedTime, setElapsedTime] = useState(null);
   const [remainingCounts, setRemainingCounts] = useState([]);
+
+  // When selectedDate changes, save current game and load the new one
+  const prevDateRef = useRef(dateStr);
+  useEffect(() => {
+    if (prevDateRef.current === dateStr) return;
+
+    // Save the current game before switching
+    setGameState((prev) => {
+      const elapsed = prev.gameStatus === 'playing'
+        ? Math.round((Date.now() - startTimeRef.current) / 1000) + (prev.elapsedSeconds || 0)
+        : prev.elapsedSeconds || 0;
+      saveGameState(prevDateRef.current, { ...prev, elapsedSeconds: elapsed });
+      return prev;
+    });
+
+    // Load new date's state
+    const newState = buildInitialState(dateStr);
+    setGameState(newState);
+
+    // Reset transient UI
+    setShakeRow(null);
+    setMessage('');
+    setRevealingRow(null);
+    setRemainingCounts([]);
+
+    // Reset timer — adjust for any saved elapsed time
+    startTimeRef.current = Date.now() - (newState.elapsedSeconds || 0) * 1000;
+    setElapsedTime(newState.gameStatus !== 'playing' ? (newState.elapsedSeconds || 0) : null);
+
+    prevDateRef.current = dateStr;
+  }, [dateStr]);
 
   // Show a temporary toast message
   const showMessage = useCallback((text, duration = 1500) => {
@@ -95,14 +138,24 @@ export default function useWordleGame() {
           const newUsedKeys = updateUsedKeys(prev.usedKeys, prev.currentGuess, letterStates);
           const won = prev.currentGuess === prev.targetWord;
           const lost = !won && prev.currentRow === MAX_GUESSES - 1;
-          return {
+          const newStatus = won ? 'won' : lost ? 'lost' : 'playing';
+
+          const elapsed = Math.round((Date.now() - startTimeRef.current) / 1000);
+
+          const newState = {
             ...prev,
             guesses: newGuesses,
             currentRow: prev.currentRow + 1,
             currentGuess: '',
-            gameStatus: won ? 'won' : lost ? 'lost' : 'playing',
+            gameStatus: newStatus,
             usedKeys: newUsedKeys,
+            elapsedSeconds: newStatus !== 'playing' ? elapsed : prev.elapsedSeconds,
           };
+
+          // Auto-save on guess commit
+          saveGameState(dateStr, newState);
+
+          return newState;
         });
 
         // After the flip animation completes, show the result message
@@ -134,7 +187,7 @@ export default function useWordleGame() {
         }));
       }
     },
-    [gameState, revealingRow, showMessage]
+    [gameState, revealingRow, showMessage, dateStr]
   );
 
   // Physical keyboard support
@@ -169,7 +222,7 @@ export default function useWordleGame() {
   // Record elapsed time when the game ends
   useEffect(() => {
     if (gameState.gameStatus !== 'playing') {
-      setElapsedTime(Math.round((Date.now() - startTimeRef.current) / 1000));
+      setElapsedTime(gameState.elapsedSeconds || Math.round((Date.now() - startTimeRef.current) / 1000));
     }
   }, [gameState.gameStatus]);
 
@@ -198,9 +251,10 @@ export default function useWordleGame() {
     message,
     revealingRow,
     handleKeyPress,
-    date: getDateString(),
+    date: dateStr,
     skillScore: calculateSkillScore(gameState.guesses, gameState.currentRow, gameState.gameStatus),
     elapsedTime,
     remainingCounts,
+    isReplay,
   };
 }

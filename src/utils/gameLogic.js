@@ -100,7 +100,7 @@ export function calculateSkillScore(guesses, currentRow, gameStatus) {
 /**
  * Generate the emoji share text for the result.
  */
-export function generateShareText(guesses, rowsUsed, won, dateString, elapsedTime) {
+export function generateShareText(guesses, rowsUsed, won, dateString, elapsedTime, isReplay) {
   const stateEmoji = {
     correct: '🟩',
     present: '🟨',
@@ -108,7 +108,8 @@ export function generateShareText(guesses, rowsUsed, won, dateString, elapsedTim
     empty: '⬜',
     tbd: '⬜',
   };
-  const header = `Low Entropy Wordle ${dateString}\n${won ? rowsUsed : 'X'}/${MAX_GUESSES}\n\n`;
+  const replayTag = isReplay ? ' (Replay)' : '';
+  const header = `Low Entropy Wordle ${dateString}${replayTag}\n${won ? rowsUsed : 'X'}/${MAX_GUESSES}\n\n`;
   const grid = guesses
     .slice(0, rowsUsed)
     .map((row) => row.map((cell) => stateEmoji[cell.state]).join(''))
@@ -168,8 +169,8 @@ export function hasSharedLetters(word1, word2) {
  * Pick today's target word and the pre-filled starting word (which shares letters
  * with the target to give the player an entropic head-start).
  */
-export function getDailyWords() {
-  const dateStr = getDateString();
+export function getDailyWords(dateStr) {
+  if (!dateStr) dateStr = getDateString();
   const rng = createSeededRng(dateStr);
   const targetIndex = Math.floor(rng() * TARGET_WORDS.length);
   const target = TARGET_WORDS[targetIndex].toUpperCase();
@@ -181,7 +182,7 @@ export function getDailyWords() {
   const initialIndex = Math.floor(rng() * candidates.length);
   const initialWord = candidates[initialIndex].toUpperCase();
 
-  return { targetWord: target, initialWord };
+  return { targetWord: target, initialWord, dateStr };
 }
 
 /**
@@ -206,7 +207,9 @@ export function calculateRemainingWords(guesses, currentRow) {
     submitted.push({ word, states });
   }
   if (submitted.length === 0) return WORD_LIST.length;
+  const guessedWords = new Set(submitted.map((s) => s.word));
   return WORD_LIST.filter((candidate) => {
+    if (guessedWords.has(candidate)) return false;
     for (const { word, states } of submitted) {
       const simulated = checkGuess(word, candidate);
       for (let i = 0; i < WORD_LENGTH; i++) {

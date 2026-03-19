@@ -3,9 +3,13 @@ import useWordleGame from '../hooks/useWordleGame';
 import Board from './Board';
 import Keyboard from './Keyboard';
 import ResultModal from './ResultModal';
+import DateSelector from './DateSelector';
+import { getDateString } from '../utils/gameLogic';
 import '../App.css';
 
 export default function WordleGame() {
+  const [selectedDate, setSelectedDate] = useState(getDateString);
+
   const {
     board,
     currentRow,
@@ -20,7 +24,8 @@ export default function WordleGame() {
     skillScore,
     elapsedTime,
     remainingCounts,
-  } = useWordleGame();
+    isReplay,
+  } = useWordleGame(selectedDate);
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -29,14 +34,16 @@ export default function WordleGame() {
     if (gameStatus !== 'playing') {
       const timer = setTimeout(() => setModalOpen(true), 1500);
       return () => clearTimeout(timer);
+    } else {
+      setModalOpen(false);
     }
-  }, [gameStatus]);
+  }, [gameStatus, selectedDate]);
 
   return (
     <div className="wordle">
       <header className="wordle-header">
         <h1>Low Entropy Wordle</h1>
-        {date && <div className="date">{date}</div>}
+        <DateSelector selectedDate={selectedDate} onDateChange={setSelectedDate} />
       </header>
 
       {message && <div className="message">{message}</div>}
@@ -63,6 +70,7 @@ export default function WordleGame() {
         skillScore={skillScore}
         elapsedTime={elapsedTime}
         onClose={() => setModalOpen(false)}
+        isReplay={isReplay}
       />
     </div>
   );

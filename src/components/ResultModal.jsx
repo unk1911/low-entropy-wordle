@@ -11,13 +11,14 @@ export default function ResultModal({
   onClose,
   skillScore,
   elapsedTime,
+  isReplay,
 }) {
   const [copied, setCopied] = useState(false);
 
   if (!isOpen) return null;
 
   const handleShare = async () => {
-    const text = generateShareText(guesses, currentRow, gameStatus === 'won', date, elapsedTime);
+    const text = generateShareText(guesses, currentRow, gameStatus === 'won', date, elapsedTime, isReplay);
     try {
       await navigator.clipboard.writeText(text);
     } catch {
@@ -40,6 +41,7 @@ export default function ResultModal({
 
         <h2 className="modal-title">
           {gameStatus === 'won' ? 'Congrats!' : 'Better luck next time!'}
+          {isReplay && <span className="replay-badge">Replay</span>}
         </h2>
 
         <p className="modal-message">
