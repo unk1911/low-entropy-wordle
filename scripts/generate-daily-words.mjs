@@ -35,12 +35,27 @@ function createSeededRng(seed) {
   };
 }
 
-function hasSharedLetters(word1, word2) {
-  const letters = new Set(word1.toLowerCase());
-  for (const char of word2.toLowerCase()) {
-    if (letters.has(char)) return true;
+function checkGuess(guess, target) {
+  const result = Array(5).fill('absent');
+  const targetLetters = target.split('');
+  const guessLetters = guess.split('');
+  for (let i = 0; i < 5; i++) {
+    if (guessLetters[i] === targetLetters[i]) {
+      result[i] = 'correct';
+      targetLetters[i] = '#';
+      guessLetters[i] = '*';
+    }
   }
-  return false;
+  for (let i = 0; i < 5; i++) {
+    if (guessLetters[i] !== '*') {
+      const idx = targetLetters.indexOf(guessLetters[i]);
+      if (idx !== -1) {
+        result[i] = 'present';
+        targetLetters[idx] = '#';
+      }
+    }
+  }
+  return result;
 }
 
 function getDailyWords(dateStr) {
@@ -48,9 +63,12 @@ function getDailyWords(dateStr) {
   const targetIndex = Math.floor(rng() * TARGET_WORDS.length);
   const target = TARGET_WORDS[targetIndex].toUpperCase();
 
-  const candidates = TARGET_WORDS.filter(
-    (w) => w.toUpperCase() !== target && hasSharedLetters(w, target)
-  );
+  // Pick an initial word that exposes at most 1 letter (yellow or green) against the target
+  const candidates = TARGET_WORDS.filter((w) => {
+    if (w.toUpperCase() === target) return false;
+    const result = checkGuess(w.toUpperCase(), target);
+    return result.filter((r) => r !== 'absent').length <= 1;
+  });
   const initialIndex = Math.floor(rng() * candidates.length);
   const initialWord = candidates[initialIndex].toUpperCase();
 

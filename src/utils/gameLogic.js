@@ -175,10 +175,12 @@ export function getDailyWords(dateStr) {
   const targetIndex = Math.floor(rng() * TARGET_WORDS.length);
   const target = TARGET_WORDS[targetIndex].toUpperCase();
 
-  // Pick an initial word that shares at least one letter with the target
-  const candidates = TARGET_WORDS.filter(
-    (w) => w.toUpperCase() !== target && hasSharedLetters(w, target)
-  );
+  // Pick an initial word that exposes at most 1 letter (yellow or green) against the target
+  const candidates = TARGET_WORDS.filter((w) => {
+    if (w.toUpperCase() === target) return false;
+    const result = checkGuess(w.toUpperCase(), target);
+    return result.filter((r) => r !== 'absent').length <= 1;
+  });
   const initialIndex = Math.floor(rng() * candidates.length);
   const initialWord = candidates[initialIndex].toUpperCase();
 

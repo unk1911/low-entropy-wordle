@@ -5,6 +5,7 @@ import Keyboard from './Keyboard';
 import ResultModal from './ResultModal';
 import DateSelector from './DateSelector';
 import { getDateString } from '../utils/gameLogic';
+import pkg from '../../package.json';
 import '../App.css';
 
 export default function WordleGame() {
@@ -42,9 +43,13 @@ export default function WordleGame() {
   return (
     <div className="wordle">
       <header className="wordle-header">
-        <h1>Low Entropy Wordle</h1>
+        <h1>Low Entropy Wordle <span className="version-badge">v{pkg.version}</span></h1>
         <DateSelector selectedDate={selectedDate} onDateChange={setSelectedDate} />
       </header>
+
+      <p className="dedication">
+        Dedicated to bebzer <span className="dedication-aka">(a.k.a. the love terrorist group)</span>
+      </p>
 
       {message && <div className="message">{message}</div>}
 
@@ -72,6 +77,11 @@ export default function WordleGame() {
         onClose={() => setModalOpen(false)}
         isReplay={isReplay}
       />
+
+      <footer className="wordle-footer">
+        Questions or feedback? Reach out to eDeliverables Inc. at{' '}
+        <a href="mailto:dolphin@edeliverables.com">dolphin@edeliverables.com</a>
+      </footer>
     </div>
   );
 }
