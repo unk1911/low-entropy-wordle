@@ -47,10 +47,6 @@ export default function WordleGame() {
         <DateSelector selectedDate={selectedDate} onDateChange={setSelectedDate} />
       </header>
 
-      <p className="dedication">
-        Dedicated to bebzer <span className="dedication-aka">(a.k.a. the love terrorist group)</span>
-      </p>
-
       {message && <div className="message">{message}</div>}
 
       {gameStatus !== 'playing' && skillScore > 0 && (
