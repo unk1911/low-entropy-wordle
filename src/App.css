@@ -408,6 +408,16 @@
   vertical-align: middle;
   margin-left: 6px;
 }
+.dedication {
+  font-size: 13px;
+  color: #818384;
+  font-style: italic;
+  margin: -10px 0 16px;
+  text-align: center;
+}
+.dedication-aka {
+  color: #565758;
+}
 .wordle-footer {
   margin-top: auto;
   padding-top: 24px;
