@@ -174,5 +174,513 @@
   "2026-04-08": {
     "targetWord": "OZONE",
     "initialWord": "SKIRT"
+  },
+  "2026-04-09": {
+    "targetWord": "TOWER",
+    "initialWord": "RIGID"
+  },
+  "2026-04-10": {
+    "targetWord": "FLASH",
+    "initialWord": "CLOUD"
+  },
+  "2026-04-11": {
+    "targetWord": "QUOTA",
+    "initialWord": "WORSE"
+  },
+  "2026-04-12": {
+    "targetWord": "RUSTY",
+    "initialWord": "SPINE"
+  },
+  "2026-04-13": {
+    "targetWord": "EATER",
+    "initialWord": "FOCUS"
+  },
+  "2026-04-14": {
+    "targetWord": "PAUSE",
+    "initialWord": "DRIED"
+  },
+  "2026-04-15": {
+    "targetWord": "HUMID",
+    "initialWord": "MELON"
+  },
+  "2026-04-16": {
+    "targetWord": "PRIDE",
+    "initialWord": "RUSTY"
+  },
+  "2026-04-17": {
+    "targetWord": "MOURN",
+    "initialWord": "AWARE"
+  },
+  "2026-04-18": {
+    "targetWord": "FLUTE",
+    "initialWord": "SPEED"
+  },
+  "2026-04-19": {
+    "targetWord": "CREAM",
+    "initialWord": "BLOWN"
+  },
+  "2026-04-20": {
+    "targetWord": "CHIEF",
+    "initialWord": "MASON"
+  },
+  "2026-04-21": {
+    "targetWord": "LOVER",
+    "initialWord": "HASTE"
+  },
+  "2026-04-22": {
+    "targetWord": "WHITE",
+    "initialWord": "TUTOR"
+  },
+  "2026-04-23": {
+    "targetWord": "TWEET",
+    "initialWord": "BLIND"
+  },
+  "2026-04-24": {
+    "targetWord": "GLAND",
+    "initialWord": "TOAST"
+  },
+  "2026-04-25": {
+    "targetWord": "FLUNG",
+    "initialWord": "JUMBO"
+  },
+  "2026-04-26": {
+    "targetWord": "GRANT",
+    "initialWord": "PITCH"
+  },
+  "2026-04-27": {
+    "targetWord": "ENJOY",
+    "initialWord": "DEATH"
+  },
+  "2026-04-28": {
+    "targetWord": "FORGE",
+    "initialWord": "POPCORN"
+  },
+  "2026-04-29": {
+    "targetWord": "YACHT",
+    "initialWord": "PLAZA"
+  },
+  "2026-04-30": {
+    "targetWord": "JUDGE",
+    "initialWord": "STYLE"
+  },
+  "2026-05-01": {
+    "targetWord": "WOUND",
+    "initialWord": "APART"
+  },
+  "2026-05-02": {
+    "targetWord": "ERROR",
+    "initialWord": "IMAGE"
+  },
+  "2026-05-03": {
+    "targetWord": "DATUM",
+    "initialWord": "CYCLE"
+  },
+  "2026-05-04": {
+    "targetWord": "OCEAN",
+    "initialWord": "STARK"
+  },
+  "2026-05-05": {
+    "targetWord": "SLAVE",
+    "initialWord": "ROUGH"
+  },
+  "2026-05-06": {
+    "targetWord": "AGAIN",
+    "initialWord": "BROWN"
+  },
+  "2026-05-07": {
+    "targetWord": "YOURS",
+    "initialWord": "SLANG"
+  },
+  "2026-05-08": {
+    "targetWord": "STALE",
+    "initialWord": "TOXIC"
+  },
+  "2026-05-09": {
+    "targetWord": "SKILL",
+    "initialWord": "FAULT"
+  },
+  "2026-05-10": {
+    "targetWord": "LIGHT",
+    "initialWord": "SCOPE"
+  },
+  "2026-05-11": {
+    "targetWord": "QUACK",
+    "initialWord": "JOLLY"
+  },
+  "2026-05-12": {
+    "targetWord": "PEACE",
+    "initialWord": "FIFTY"
+  },
+  "2026-05-13": {
+    "targetWord": "ACUTE",
+    "initialWord": "FLICK"
+  },
+  "2026-05-14": {
+    "targetWord": "GROAN",
+    "initialWord": "SHALL"
+  },
+  "2026-05-15": {
+    "targetWord": "DREAM",
+    "initialWord": "SHRUG"
+  },
+  "2026-05-16": {
+    "targetWord": "COUGH",
+    "initialWord": "SHAKE"
+  },
+  "2026-05-17": {
+    "targetWord": "FLORA",
+    "initialWord": "THIEF"
+  },
+  "2026-05-18": {
+    "targetWord": "FLOOR",
+    "initialWord": "TASTE"
+  },
+  "2026-05-19": {
+    "targetWord": "LEAVE",
+    "initialWord": "DATUM"
+  },
+  "2026-05-20": {
+    "targetWord": "LIMIT",
+    "initialWord": "WRECK"
+  },
+  "2026-05-21": {
+    "targetWord": "EVERY",
+    "initialWord": "HUMID"
+  },
+  "2026-05-22": {
+    "targetWord": "BLACK",
+    "initialWord": "SIGMA"
+  },
+  "2026-05-23": {
+    "targetWord": "LEAST",
+    "initialWord": "QUEUE"
+  },
+  "2026-05-24": {
+    "targetWord": "CREEK",
+    "initialWord": "STUFF"
+  },
+  "2026-05-25": {
+    "targetWord": "PRISM",
+    "initialWord": "PUPPY"
+  },
+  "2026-05-26": {
+    "targetWord": "CABLE",
+    "initialWord": "THOSE"
+  },
+  "2026-05-27": {
+    "targetWord": "UDDER",
+    "initialWord": "TWIRL"
+  },
+  "2026-05-28": {
+    "targetWord": "CROSS",
+    "initialWord": "MINUS"
+  },
+  "2026-05-29": {
+    "targetWord": "OTHER",
+    "initialWord": "RIGID"
+  },
+  "2026-05-30": {
+    "targetWord": "DRAKE",
+    "initialWord": "SIXTH"
+  },
+  "2026-05-31": {
+    "targetWord": "PLEAD",
+    "initialWord": "WHOSE"
+  },
+  "2026-06-01": {
+    "targetWord": "GROWL",
+    "initialWord": "FULLY"
+  },
+  "2026-06-02": {
+    "targetWord": "TWEED",
+    "initialWord": "GOING"
+  },
+  "2026-06-03": {
+    "targetWord": "POINT",
+    "initialWord": "SERVE"
+  },
+  "2026-06-04": {
+    "targetWord": "HONOR",
+    "initialWord": "LIVER"
+  },
+  "2026-06-05": {
+    "targetWord": "ULTRA",
+    "initialWord": "GOING"
+  },
+  "2026-06-06": {
+    "targetWord": "TIMER",
+    "initialWord": "GLAND"
+  },
+  "2026-06-07": {
+    "targetWord": "ENEMY",
+    "initialWord": "FROST"
+  },
+  "2026-06-08": {
+    "targetWord": "ENJOY",
+    "initialWord": "IDEAL"
+  },
+  "2026-06-09": {
+    "targetWord": "BOARD",
+    "initialWord": "WALTZ"
+  },
+  "2026-06-10": {
+    "targetWord": "STORY",
+    "initialWord": "CHEER"
+  },
+  "2026-06-11": {
+    "targetWord": "STOUT",
+    "initialWord": "SLIDE"
+  },
+  "2026-06-12": {
+    "targetWord": "SHOOT",
+    "initialWord": "GLASS"
+  },
+  "2026-06-13": {
+    "targetWord": "CRISP",
+    "initialWord": "LAUGH"
+  },
+  "2026-06-14": {
+    "targetWord": "STAMP",
+    "initialWord": "SERVE"
+  },
+  "2026-06-15": {
+    "targetWord": "GIVEN",
+    "initialWord": "OLDER"
+  },
+  "2026-06-16": {
+    "targetWord": "ESSAY",
+    "initialWord": "TRAWL"
+  },
+  "2026-06-17": {
+    "targetWord": "VOILA",
+    "initialWord": "PETTY"
+  },
+  "2026-06-18": {
+    "targetWord": "MUDDY",
+    "initialWord": "BONUS"
+  },
+  "2026-06-19": {
+    "targetWord": "PEARL",
+    "initialWord": "QUIRK"
+  },
+  "2026-06-20": {
+    "targetWord": "ZIPPY",
+    "initialWord": "SLEEK"
+  },
+  "2026-06-21": {
+    "targetWord": "HARSH",
+    "initialWord": "FLANK"
+  },
+  "2026-06-22": {
+    "targetWord": "TUNIC",
+    "initialWord": "ROVER"
+  },
+  "2026-06-23": {
+    "targetWord": "POLAR",
+    "initialWord": "EXILE"
+  },
+  "2026-06-24": {
+    "targetWord": "BONUS",
+    "initialWord": "SPICE"
+  },
+  "2026-06-25": {
+    "targetWord": "FLAIR",
+    "initialWord": "TWIST"
+  },
+  "2026-06-26": {
+    "targetWord": "REPAY",
+    "initialWord": "VOCAL"
+  },
+  "2026-06-27": {
+    "targetWord": "ROYAL",
+    "initialWord": "ENDED"
+  },
+  "2026-06-28": {
+    "targetWord": "PIANO",
+    "initialWord": "SWORD"
+  },
+  "2026-06-29": {
+    "targetWord": "ZEBRA",
+    "initialWord": "MOIST"
+  },
+  "2026-06-30": {
+    "targetWord": "GROWL",
+    "initialWord": "SWEAT"
+  },
+  "2026-07-01": {
+    "targetWord": "FRUIT",
+    "initialWord": "STOVE"
+  },
+  "2026-07-02": {
+    "targetWord": "NORTH",
+    "initialWord": "VERSE"
+  },
+  "2026-07-03": {
+    "targetWord": "TRICK",
+    "initialWord": "CHAOS"
+  },
+  "2026-07-04": {
+    "targetWord": "STRIP",
+    "initialWord": "LOOSE"
+  },
+  "2026-07-05": {
+    "targetWord": "PUNCH",
+    "initialWord": "BLIND"
+  },
+  "2026-07-06": {
+    "targetWord": "PRONE",
+    "initialWord": "SHIRT"
+  },
+  "2026-07-07": {
+    "targetWord": "SWORE",
+    "initialWord": "DRAIN"
+  },
+  "2026-07-08": {
+    "targetWord": "BOOST",
+    "initialWord": "PLACE"
+  },
+  "2026-07-09": {
+    "targetWord": "REPAY",
+    "initialWord": "TENSE"
+  },
+  "2026-07-10": {
+    "targetWord": "MUSIC",
+    "initialWord": "CRANE"
+  },
+  "2026-07-11": {
+    "targetWord": "BRAIN",
+    "initialWord": "STYLE"
+  },
+  "2026-07-12": {
+    "targetWord": "BENCH",
+    "initialWord": "STEER"
+  },
+  "2026-07-13": {
+    "targetWord": "STUDY",
+    "initialWord": "CREEP"
+  },
+  "2026-07-14": {
+    "targetWord": "FOGGY",
+    "initialWord": "ARGUE"
+  },
+  "2026-07-15": {
+    "targetWord": "VIVID",
+    "initialWord": "AGREE"
+  },
+  "2026-07-16": {
+    "targetWord": "IVORY",
+    "initialWord": "SNARE"
+  },
+  "2026-07-17": {
+    "targetWord": "FLICK",
+    "initialWord": "WEIGH"
+  },
+  "2026-07-18": {
+    "targetWord": "LUCID",
+    "initialWord": "REPLY"
+  },
+  "2026-07-19": {
+    "targetWord": "TRIED",
+    "initialWord": "CABIN"
+  },
+  "2026-07-20": {
+    "targetWord": "SORRY",
+    "initialWord": "WATER"
+  },
+  "2026-07-21": {
+    "targetWord": "UNDUE",
+    "initialWord": "LIGHT"
+  },
+  "2026-07-22": {
+    "targetWord": "STEEP",
+    "initialWord": "BUYER"
+  },
+  "2026-07-23": {
+    "targetWord": "SNEAK",
+    "initialWord": "ROGUE"
+  },
+  "2026-07-24": {
+    "targetWord": "SPARK",
+    "initialWord": "BLEND"
+  },
+  "2026-07-25": {
+    "targetWord": "SNARE",
+    "initialWord": "TORCH"
+  },
+  "2026-07-26": {
+    "targetWord": "FUNNY",
+    "initialWord": "PHONE"
+  },
+  "2026-07-27": {
+    "targetWord": "CHINA",
+    "initialWord": "CRUDE"
+  },
+  "2026-07-28": {
+    "targetWord": "GROWL",
+    "initialWord": "SCENE"
+  },
+  "2026-07-29": {
+    "targetWord": "SORRY",
+    "initialWord": "TENSE"
+  },
+  "2026-07-30": {
+    "targetWord": "EATEN",
+    "initialWord": "ISSUE"
+  },
+  "2026-07-31": {
+    "targetWord": "ACTOR",
+    "initialWord": "FLASH"
+  },
+  "2026-08-01": {
+    "targetWord": "NOVEL",
+    "initialWord": "THING"
+  },
+  "2026-08-02": {
+    "targetWord": "LEGAL",
+    "initialWord": "FERRY"
+  },
+  "2026-08-03": {
+    "targetWord": "RIDGE",
+    "initialWord": "ABOVE"
+  },
+  "2026-08-04": {
+    "targetWord": "SCARY",
+    "initialWord": "PRIZE"
+  },
+  "2026-08-05": {
+    "targetWord": "INNER",
+    "initialWord": "POOCH"
+  },
+  "2026-08-06": {
+    "targetWord": "UPPER",
+    "initialWord": "AHEAD"
+  },
+  "2026-08-07": {
+    "targetWord": "USING",
+    "initialWord": "SLEEP"
+  },
+  "2026-08-08": {
+    "targetWord": "CLICK",
+    "initialWord": "ZONAL"
+  },
+  "2026-08-09": {
+    "targetWord": "SANDY",
+    "initialWord": "TRAIT"
+  },
+  "2026-08-10": {
+    "targetWord": "TULIP",
+    "initialWord": "HELLO"
+  },
+  "2026-08-11": {
+    "targetWord": "DENSE",
+    "initialWord": "PHOTO"
+  },
+  "2026-08-12": {
+    "targetWord": "MAKER",
+    "initialWord": "DEPTH"
+  },
+  "2026-08-13": {
+    "targetWord": "LIGHT",
+    "initialWord": "CREEK"
   }
 }

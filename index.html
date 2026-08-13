@@ -3,7 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Low Entropy Wordle</title>
+    <meta name="description" content="Play Low Entropy Wordle, a daily Wordle variant with a free starting clue, search-space tracking, and an information-theory Skill Score for competitive play." />
+    <meta name="author" content="unk1911" />
+    <link rel="canonical" href="https://wordle.edeliverables.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://wordle.edeliverables.com/" />
+    <meta property="og:title" content="Low Entropy Wordle" />
+    <meta property="og:description" content="A daily Wordle variant with a free clue, information-theory search tracking, and Skill Score tie-breakers." />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Low Entropy Wordle" />
+    <meta name="twitter:description" content="A daily Wordle variant with a free clue and an information-theory Skill Score." />
+    <title>Low Entropy Wordle | Daily Information-Theory Word Game</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "Low Entropy Wordle",
+        "url": "https://wordle.edeliverables.com/",
+        "description": "A daily Wordle variant with a free starting clue, search-space tracking, and a Skill Score for competitive play.",
+        "genre": ["Word game", "Puzzle game"],
+        "applicationCategory": "Game",
+        "operatingSystem": "Any",
+        "author": {
+          "@type": "Person",
+          "name": "unk1911",
+          "url": "https://github.com/unk1911"
+        },
+        "isAccessibleForFree": true
+      }
+    </script>
     <style>
       body {
         margin: 0;
@@ -16,7 +44,14 @@
     </style>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <main>
+        <h1>Low Entropy Wordle</h1>
+        <p>A daily Wordle variant with an information-theory twist and a free starting clue.</p>
+        <p>Play the same daily five-letter puzzle with friends, track how many possible words remain after each guess, and compare Skill Scores when players use the same number of guesses.</p>
+        <p><a href="https://github.com/unk1911/low-entropy-wordle">View Low Entropy Wordle on GitHub</a></p>
+      </main>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
