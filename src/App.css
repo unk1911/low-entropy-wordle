@@ -425,6 +425,9 @@
   color: #565758;
   text-align: center;
 }
+.wordle-footer div + div {
+  margin-top: 6px;
+}
 .wordle-footer a {
   color: #818384;
   text-decoration: none;

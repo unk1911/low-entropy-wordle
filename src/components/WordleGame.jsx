@@ -79,8 +79,16 @@ export default function WordleGame() {
       />
 
       <footer className="wordle-footer">
-        Questions or feedback? Reach out to eDeliverables Inc. at{' '}
-        <a href="mailto:dolphin@edeliverables.com">dolphin@edeliverables.com</a>
+        <div>
+          <a href="https://edeliverables.com">eDeliverables</a> (2026)
+        </div>
+        <div>
+          Questions or feedback? Reach out at{' '}
+          <a href="mailto:dolphin@edeliverables.com">dolphin@edeliverables.com</a>
+        </div>
+        <div>
+          <a href="https://github.com/unk1911/low-entropy-wordle">View this project on GitHub</a>
+        </div>
       </footer>
     </div>
   );
