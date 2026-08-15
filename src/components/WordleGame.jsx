@@ -47,6 +47,10 @@ export default function WordleGame() {
         <DateSelector selectedDate={selectedDate} onDateChange={setSelectedDate} />
       </header>
 
+      <p className="game-intro">
+        A daily five-letter Wordle alternative with a free starting clue, search-space tracking, and a Skill Score for competitive play.
+      </p>
+
       <p className="dedication">
         Dedicated to bebzer <span className="dedication-aka">(a.k.a. the love terrorist group)</span>
       </p>

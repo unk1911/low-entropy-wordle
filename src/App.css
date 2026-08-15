@@ -110,6 +110,15 @@
   gap: 5px;
   position: relative;
 }
+.game-intro {
+  max-width: 520px;
+  margin: 0 auto 14px;
+  padding: 0 16px;
+  color: #a8a8a8;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  text-align: center;
+}
 .row.shake {
   animation: shake 0.5s ease-in-out;
 }
