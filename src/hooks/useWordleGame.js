@@ -52,7 +52,10 @@ function buildFreshState(dateStr) {
 
 function buildInitialState(dateStr) {
   const saved = loadGameState(dateStr);
-  if (saved) return saved;
+  // Only resume a saved game if it was played against the word this date still
+  // resolves to. A stale target (e.g. saved before a word-list fix) would strand
+  // the player on an unwinnable board, so start that day over instead.
+  if (saved && saved.targetWord === getDailyWords(dateStr).targetWord) return saved;
   return buildFreshState(dateStr);
 }
 
