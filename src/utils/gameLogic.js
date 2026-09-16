@@ -166,18 +166,41 @@ export function hasSharedLetters(word1, word2) {
 }
 
 /**
+ * A target is only playable if it is exactly WORD_LENGTH letters and typeable,
+ * i.e. present in the guess dictionary. A malformed entry (wrong length) makes
+ * the day unsolvable: checkGuess compares against undefined positions and the
+ * win check can never match a WORD_LENGTH guess.
+ */
+export function isPlayableTarget(word) {
+  return typeof word === 'string' && word.length === WORD_LENGTH && VALID_WORDS.has(word.toLowerCase());
+}
+
+/**
+ * Return every TARGET_WORDS entry that could not be played. Empty means healthy.
+ */
+export function findBadTargetWords() {
+  return TARGET_WORDS.filter((w) => !isPlayableTarget(w));
+}
+
+/**
  * Pick today's target word and the pre-filled starting word (which shares letters
  * with the target to give the player an entropic head-start).
  */
 export function getDailyWords(dateStr) {
   if (!dateStr) dateStr = getDateString();
   const rng = createSeededRng(dateStr);
-  const targetIndex = Math.floor(rng() * TARGET_WORDS.length);
+  let targetIndex = Math.floor(rng() * TARGET_WORDS.length);
+  // Safety net: never serve an unplayable target. Scanning forward from the drawn
+  // index keeps every other day's word unchanged.
+  for (let i = 0; i < TARGET_WORDS.length && !isPlayableTarget(TARGET_WORDS[targetIndex]); i++) {
+    targetIndex = (targetIndex + 1) % TARGET_WORDS.length;
+  }
   const target = TARGET_WORDS[targetIndex].toUpperCase();
 
   // Pick an initial word that exposes at most 1 letter (yellow or green) against the target
   const candidates = TARGET_WORDS.filter((w) => {
     if (w.toUpperCase() === target) return false;
+    if (!isPlayableTarget(w)) return false;
     const result = checkGuess(w.toUpperCase(), target);
     return result.filter((r) => r !== 'absent').length <= 1;
   });

@@ -19,6 +19,21 @@ if (!match) throw new Error('Could not parse TARGET_WORDS from src/data/words.js
 const TARGET_WORDS = [...match[1].matchAll(/"([^"]+)"/g)].map((m) => m[1]);
 console.log(`Loaded ${TARGET_WORDS.length} target words`);
 
+// Guess dictionary — a target outside it, or not exactly 5 letters, makes that
+// day unsolvable. Fail the build rather than ship an unwinnable puzzle.
+const WORD_SET = new Set(
+  readFileSync(join(ROOT, 'src/data/5-letter-words.txt'), 'utf-8')
+    .split('\n')
+    .map((w) => w.trim().toLowerCase())
+    .filter(Boolean)
+);
+const badTargets = TARGET_WORDS.filter((w) => w.length !== 5 || !WORD_SET.has(w.toLowerCase()));
+if (badTargets.length > 0) {
+  throw new Error(
+    `Unplayable entries in TARGET_WORDS (must be 5 letters and present in 5-letter-words.txt): ${badTargets.join(', ')}`
+  );
+}
+
 // Same seeded RNG as src/utils/gameLogic.js
 function createSeededRng(seed) {
   let hash = 0;
